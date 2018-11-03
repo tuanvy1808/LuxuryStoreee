@@ -2,27 +2,25 @@ use LuxuryStoreee;
 
 create table Suppliers(
 				SID varchar(20) not null primary key,
-                SName varchar(30) not null,
+                SName varchar(150) not null,
                 SPhone varchar(11) not null,
-                SAdd varchar(30) not null
+                SAdd varchar(200) not null
 );
 
-alter table Products add foreign key (PSupID) references Suppliers(SID);
-
-create table Imports(
-				IID varchar(20) not null primary key,
-                ISID varchar(20) not null,
-                IDate Date not null,
-                IStatus int default 0,
-                ICmt text,
-                foreign key (ISID) references Suppliers(SID)
+create table Purchases(
+				PurchaseID varchar(20) not null primary key,
+                SupID varchar(20) not null,
+                PurchaseDate TIMESTAMP not null,
+                PurchaseStatus int default 0,
+                PurchaseCmt text,
+                foreign key (SupID) references Suppliers(SID)
 );
 
-create table ImportDetails(
-				IDID varchar(20) not null primary key,
-                IDPID varchar(20) not null,
-                IDQuan int not null,
-                IDAmount double not null,
-                foreign key(IDPID) references Products(PID),
-                foreign key(IDID) references Imports(IID)
+create table PurchaseDetails(
+				PDID varchar(20) not null primary key,
+                PurchaseID varchar(20),
+                ProductID varchar(20) not null,
+                PDQuan double not null,
+                foreign key(ProductID) references Products(PID),
+                foreign key(PurchaseID) references Purchases(PurchaseID)
 );
