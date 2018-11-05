@@ -22,6 +22,7 @@ create table Products(
                 PMSRP double not null,
                 PPPrice double not null,
                 PQuan int not null,
+                PIMG TEXT,
                 foreign key(CatID) references Categories(CatID),
                 FOREIGN KEY(BID) REFERENCES Brand(BID)
 );
